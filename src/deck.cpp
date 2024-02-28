@@ -8,6 +8,10 @@ enum class cardNames {
     ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, DRAW2, SKIP, DRAW4, WILD
 };
 
+/* the card names for this are just for the player, cards with special abilities will have a value less than 0 for example 
+reverse will have a -1, draw2 -2, skip -3, draw4 -4, wild -5. Also for card colors the basic colors will be not be changed
+but if a black card is played i plan for it to be made that the player then chooses a temporary color that can be played
+ontop of said color*/
 struct Card {
     cardNames name;
     colors color;
@@ -16,7 +20,7 @@ struct Card {
 
 struct Deck {
     //108 cards in the deck 
-    Card arrCards[107];
+    Card arrCards[108];
 
     /*this will setup the cards so that we have all the cards which should be 9 number cards of each color with 1 zero
     2 of each specialty card, 4 black wild cards and 4 black draw 4 cards */
@@ -27,9 +31,13 @@ struct Deck {
         for (int i = (int)colors::BLUE; i <= (int)colors::YELLOW; i++) {
             //there is only one 0 card for each color so that is here
             Card c;
-            c.color = (colors)0;
+            c.color = (colors)i;
             c.name = (cardNames)0;
             c.value = 0;
+            
+            // this is putting the cards into the deck, like a real deck of cards with an order
+            int index
+            arrCards[index] = 
 
             //this is going to give us 2 of every number card for each color and 2 of each specialty card
             for (int j = 0; j < 2; j++) {
@@ -38,24 +46,26 @@ struct Deck {
                     c.color = (colors)i;
                     c.name = (cardNames)k;
 
-                    if (c.name == cardNames::REVERSE) {
-                        c.value = -1;
-                    }
-                    else if (c.name == cardNames::DRAW2) {
-                        c.value = -2;
-                    }
-                    else if (c.name == cardNames::SKIP) {
-                        c.value = -3;
-                    }
-                    else {
-                        c.value = (int)c.name;
+                    // assigning the specialty cards with values less than 0
+                    switch (c.name) {
+                        case cardNames::REVERSE:
+                            c.value = -1;
+                            break;
+                        case cardNames::DRAW2:
+                            c.value = -2;
+                            break;
+                        case cardNames::SKIP:
+                            c.value = -3;
+                            break;
+                        default:
+                            c.value = (int)c.name;
                     }
                     std::cout << (int)c.color << "  " << (int)c.name << " " << (int)c.value << "\n";
                 }
             }
         }
 
-        // this will create 4 of each Black card
+        // this will create 4 of each Black card (wild and draw4s)
         for (int i = (int)cardNames::DRAW4; i <= (int)cardNames::WILD; i++) {
             for(int k = 0; k < 4; k++) {
                 Card c;
