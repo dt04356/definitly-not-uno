@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <time.h>
 
 enum class colors {
     BLUE, GREEN, RED, YELLOW, BLACK
@@ -24,7 +26,18 @@ struct Deck {
     
     //cardshuffle cursed technique
     void shuffle() {
-        std::cout << "FINNISH DECK SHUFFLE U LAZY ASS";
+        Card temp;
+        int rIndex;
+        //picks a random based on time of system (ME THINKS)
+        srand(time(0));
+        
+        //randomly switches cards between index's 108 times it 
+        for (int i = 0; i < 108; i++) {
+            rIndex = rand() % 108;
+            temp = arrCards[i];
+            arrCards[i] = arrCards[rIndex];
+            arrCards[rIndex] = temp;
+        }
     }
 
     /*this will setup the cards so that we have all the cards which should be 9 number cards of each color with 1 zero
@@ -114,8 +127,9 @@ struct Deck {
 int main() {
     Deck deck;
     deck.setupCards();
+    deck.printCards();
     deck.shuffle();
-    //deck.printCards();
+    deck.printCards();
 
     return 0;
 };
