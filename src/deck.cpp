@@ -21,12 +21,18 @@ struct Card {
 struct Deck {
     //108 cards in the deck 
     Card arrCards[108];
+    
+    //cardshuffle cursed technique
+    void shuffle() {
+        std::cout << "FINNISH DECK SHUFFLE U LAZY ASS";
+    }
 
     /*this will setup the cards so that we have all the cards which should be 9 number cards of each color with 1 zero
     2 of each specialty card, 4 black wild cards and 4 black draw 4 cards */
     void setupCards() {
-        //this will tikk up on card creation, as long as its put in =)
-        int cardsCreated = 0;
+        int numCards = 0;
+        int index;
+        // SIDENOTE // index counts from the start of the iteration DO NOT FUCK WITH INDEX PLEASE
 
         for (int i = (int)colors::BLUE; i <= (int)colors::YELLOW; i++) {
             //there is only one 0 card for each color so that is here
@@ -34,10 +40,10 @@ struct Deck {
             c.color = (colors)i;
             c.name = (cardNames)0;
             c.value = 0;
-            
-            // this is putting the cards into the deck, like a real deck of cards with an order
-            int index
-            arrCards[index] = 
+        
+            // this is putting the 0 cards into the deck
+            index = i * 25;
+            arrCards[index] = c;
 
             //this is going to give us 2 of every number card for each color and 2 of each specialty card
             for (int j = 0; j < 2; j++) {
@@ -60,7 +66,11 @@ struct Deck {
                         default:
                             c.value = (int)c.name;
                     }
-                    std::cout << (int)c.color << "  " << (int)c.name << " " << (int)c.value << "\n";
+                    
+                    // this is going to put all the cards into the deck here
+                    // k + 1 because the should be a zero card of each color at the zero mark
+                    index++;
+                    arrCards[index] = c;
                 }
             }
         }
@@ -81,16 +91,31 @@ struct Deck {
                 else {
                     std::cout << "ERROR:: WILD//DRAW4";
                 }
-                std::cout << (int)c.color << " " << (int)c.name << " " << (int)c.value << "\n";
+                // this should fill the spots from 100 - 107 in arrCards
+                index++;
+                arrCards[index] = c;
             }
+        }
+    }
+
+    //this will print all the cards with a line number for wher the cards are in order
+    void printCards() {
+        int numcards = 0;
+        
+        for (int i = 0; i < 108; i++) {
+            numcards++;
+            std::cout << numcards  << "     ";
+            std::cout << (int)arrCards[i].color << " " << (int)arrCards[i].name << " " << (int)arrCards[i].value << "\n";
         }
     }
 };
 
 
 int main() {
-    Deck deck1;
-    deck1.setupCards();
+    Deck deck;
+    deck.setupCards();
+    deck.shuffle();
+    //deck.printCards();
 
     return 0;
 };
