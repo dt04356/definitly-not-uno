@@ -9,6 +9,7 @@ class NetHandler {
 };
 
 void setConnection(char * addr){
+    int soc;
     struct addrinfo *sinfo;
     struct addrinfo hints;
     //sets the bytes of hints to 0
@@ -25,6 +26,11 @@ void setConnection(char * addr){
     else{
         std::cout<<"made the connection";
     }
+    //standard practice(for the server) is to getaddrinfo -> socket->bind->listen->accept(HERE YOU GET A NEW SOCKET ID)
+    //standard practice(for the client) is to getaddrinfo(of server)->socket->connet->rend/recv
+    soc = socket(sinfo -> ai_family, sinfo->ai_socktype, sinfo->ai_protocol);
+    bind(soc, sinfo->ai_addr,sinfo->ai_addrlen);
+
     //frees the memory reserved in the sinfo struct
     freeaddrinfo(sinfo);
 }
