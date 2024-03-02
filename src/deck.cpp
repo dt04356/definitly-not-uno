@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 #include <cstdlib>
 #include <time.h>
 
@@ -23,7 +24,13 @@ struct Card {
 struct Deck {
     //108 cards in the deck 
     Card arrCards[108];
-    
+
+    //draws a card off the top of the deck
+    Card draw() {
+        Card c;
+        return c;
+    }
+
     //cardshuffle cursed technique
     void shuffle() {
         Card temp;
@@ -127,9 +134,9 @@ struct Deck {
 int main() {
     Deck deck;
     deck.setupCards();
-    deck.printCards();
     deck.shuffle();
     deck.printCards();
-
+    Card c = deck.draw();
+    std::cout << (int)c.color << " " << (int)c.name << " " << (int)c.value;
     return 0;
 };
