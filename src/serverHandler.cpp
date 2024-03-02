@@ -8,7 +8,7 @@ class serverHandler{
     public:
      struct socketList{
         int socket;
-        socketList* nextMember = NULL;
+        socketList* nextMember;
     };
     public:
     //returns a pointer to an addrinfo struct for ipv4 address addr

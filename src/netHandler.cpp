@@ -35,9 +35,11 @@ void setConnection(char * addr){
     freeaddrinfo(sinfo);
 }
 int main() {
-    std::string addr = "192.168.0.211";
-    char * charAddr = &addr[0];
-    
-    setConnection(charAddr);
+    std::string addr;
+    std::cin>>addr;
+    std::cout<<addr;
+    //char * charAddr = &addr[0];
+
+    //setConnection(charAddr);
     return 0;
 }
