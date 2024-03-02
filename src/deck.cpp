@@ -28,6 +28,9 @@ struct Deck {
     //draws a card off the top of the deck
     Card draw() {
         Card c;
+        c = deqCards.front();
+        deqCards.pop_front();
+        //returns card contents
         return c;
     }
 
@@ -35,15 +38,15 @@ struct Deck {
     void shuffle() {
         Card temp;
         int rIndex;
-        //picks a random based on time of system (ME THINKS)
+        //picks a random based on time of system
         srand(time(0));
         
         //randomly switches cards between index's 108 times it 
         for (int i = 0; i < 108; i++) {
-            //rIndex = rand() % 108;
-           // temp = arrCards[i];
-            //arrCards[i] = arrCards[rIndex];
-            //arrCards[rIndex] = temp;
+            rIndex = rand() % 108;
+            temp = deqCards[i];
+            deqCards[i] = deqCards[rIndex];
+            deqCards[rIndex] = temp;
         }
     }
 
@@ -113,6 +116,7 @@ struct Deck {
 
     //this will print all the cards with a line number for where the cards are in order
     void printCards() {
+        std::cout << "printing cards... \n";
         for (int i = 0; i < 108; i++) {
             Card c;
             c = deqCards.front();
@@ -121,6 +125,7 @@ struct Deck {
             deqCards.pop_front();
             deqCards.push_back(c);
         }
+        std::cout << "done printing!\n\n";
     }
 };
 
@@ -128,10 +133,11 @@ struct Deck {
 int main() {
     Deck deck;
     deck.setupCards();
-    //deck.printCards();
+    deck.printCards();
     deck.shuffle();
     deck.printCards();
-    //Card c = deck.draw();
-    //std::cout << (int)c.color << " " << (int)c.name << " " << (int)c.value;
+    Card c = deck.draw();
+    std::cout << (int)c.color << " " << (int)c.name << " " << (int)c.value;
+    deck.printCards();
     return 0;
 };
