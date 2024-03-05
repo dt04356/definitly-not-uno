@@ -19,8 +19,8 @@ class serverHandler{
         newConnect.ai_family = AF_INET;
         newConnect.ai_socktype = SOCK_STREAM;
         newConnect.ai_flags = AI_PASSIVE;
-
-        if(getaddrinfo(NULL,"32666",&newConnect,&connectPtr)!=0){
+        close()
+        if(getaddrinfo("127.0.0.1","32666",&newConnect,&connectPtr)!=0){
             std::cout<<"Error connection failed.\n";
             exit(1);
         }
@@ -80,10 +80,13 @@ class serverHandler{
 };
 
 int main(){
+    std::cout<<"setting up serverHandlerObject";
     serverHandler server;
+    std::cout<<"setting up connection";
     addrinfo* ptr = server.setUpConnection();
     int serverSoc = server.getSocket(ptr);
+    std::cout<<"setting up server";
     serverHandler::socketList* head = server.setUpServer(1);
     server.endServer(head);
     return 0;
-}
+};
