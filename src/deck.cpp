@@ -131,13 +131,6 @@ struct Deck {
 
 
 int main() {
-    Deck deck;
-    deck.setupCards();
-    deck.printCards();
-    deck.shuffle();
-    deck.printCards();
-    Card c = deck.draw();
-    std::cout << (int)c.color << " " << (int)c.name << " " << (int)c.value;
-    deck.printCards();
+   
     return 0;
 };
